@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "title": "前端小鑫同学",
+    "about": "关于我",
+    "projects": "项目",
+    "blog": "博客",
+    "contact": "联系我"
+  },
+  "home": {
+    "greeting": "你好，我是前端小鑫同学 👋",
+    "intro": "热爱前端开发的程序员，专注于创造优雅的用户界面和流畅的用户体验。在 GitHub 上以 OSpoon 的身份活跃，分享技术经验和开源项目。",
+    "experience": "5年前端开发经验，擅长Vue生态、微前端架构，对前端工程化和性能优化有独到见解。热衷于分享前端开发经验，帮助更多的开发者成长。"
+  },
+  "skills": {
+    "title": "技术栈",
+    "items": ["Vue.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Vite", "Webpack", "微前端", "性能优化", "工程化"]
+  },
+  "social": {
+    "title": "社交链接",
+    "github": "GitHub",
+    "juejin": "掘金",
+    "csdn": "CSDN",
+    "zhihu": "知乎"
+  },
+  "work": {
+    "title": "工作经历",
+    "job1": {
+      "title": "高级前端开发工程师",
+      "company": "某互联网公司 | 2021年至今",
+      "description": "负责公司核心产品的前端架构设计和实现，带领团队进行微前端改造，提升了研发效率30%。主导前端性能优化，使产品加载速度提升50%。"
+    },
+    "job2": {
+      "title": "中级前端开发工程师",
+      "company": "某科技公司 | 2019年-2021年",
+      "description": "负责公司电商平台的前端开发，使用Vue全家桶构建高性能SPA应用。参与前端组件库设计，提高了团队开发效率。"
+    }
+  },
+  "projects": {
+    "title": "开源项目",
+    "viewCode": "查看源码",
+    "project1": {
+      "title": "vxe-table-plugin",
+      "description": "Vue3表格插件，提供丰富的表格功能和灵活的配置项，支持大数据渲染和虚拟滚动。"
+    },
+    "project2": {
+      "title": "mini-vue-router",
+      "description": "轻量级Vue路由实现，提供核心功能，帮助开发者理解Vue Router的工作原理。"
+    },
+    "project3": {
+      "title": "fe-monitor",
+      "description": "前端监控SDK，支持性能监控、错误捕获和用户行为追踪，帮助开发者提升应用质量。"
+    }
+  },
+  "blog": {
+    "title": "最新文章",
+    "readMore": "阅读全文",
+    "post1": {
+      "title": "Vue3 组合式 API 最佳实践",
+      "description": "深入探讨 Vue3 Composition API 的使用技巧和最佳实践，帮助你编写更加可维护的代码。",
+      "date": "2023-12-15"
+    },
+    "post2": {
+      "title": "前端工程化：从零搭建现代化前端项目",
+      "description": "详细介绍如何从零开始搭建一个包含完整工具链和最佳实践的现代前端项目。",
+      "date": "2023-11-20"
+    },
+    "post3": {
+      "title": "深入理解微前端架构",
+      "description": "解析微前端的核心概念、实现方式和实际应用场景，分享微前端改造的经验和心得。",
+      "date": "2023-10-05"
+    }
+  },
+  "contact": {
+    "title": "联系我",
+    "form": {
+      "title": "留言",
+      "name": "姓名",
+      "email": "邮箱",
+      "message": "留言",
+      "send": "发送留言",
+      "success": "留言已成功提交到GitHub Issues，感谢您的留言！",
+      "error": "提交失败，请稍后再试。",
+      "validation": "请填写所有必填字段"
+    },
+    "other": {
+      "title": "其他联系方式",
+      "email": "邮箱",
+      "wechat": "微信公众号",
+      "wechatName": "前端小鑫同学",
+      "followWechat": "欢迎关注公众号"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 前端小鑫同学. All rights reserved."
+  },
+  "toggles": {
+    "language": "语言",
+    "theme": "主题",
+    "lightMode": "浅色",
+    "darkMode": "深色"
+  }
+} 

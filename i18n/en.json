@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "title": "Frontend Xiaoxin",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "home": {
+    "greeting": "Hello, I'm Xiaoxin 👋",
+    "intro": "A passionate frontend developer focused on creating elegant user interfaces and smooth user experiences. Active on GitHub as OSpoon, sharing technical experience and open source projects.",
+    "experience": "5 years of frontend development experience, skilled in Vue ecosystem and micro-frontend architecture, with unique insights into frontend engineering and performance optimization. Passionate about sharing frontend development experience to help more developers grow."
+  },
+  "skills": {
+    "title": "Tech Stack",
+    "items": ["Vue.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Vite", "Webpack", "Micro-Frontend", "Performance Optimization", "Engineering"]
+  },
+  "social": {
+    "title": "Social Links",
+    "github": "GitHub",
+    "juejin": "Juejin",
+    "csdn": "CSDN",
+    "zhihu": "Zhihu"
+  },
+  "work": {
+    "title": "Work Experience",
+    "job1": {
+      "title": "Senior Frontend Developer",
+      "company": "Internet Company | 2021 - Present",
+      "description": "Responsible for frontend architecture design and implementation of core products. Led the team in micro-frontend transformation, improving development efficiency by 30%. Spearheaded frontend performance optimization, increasing product loading speed by 50%."
+    },
+    "job2": {
+      "title": "Mid-level Frontend Developer",
+      "company": "Tech Company | 2019 - 2021",
+      "description": "Responsible for frontend development of e-commerce platform, building high-performance SPA applications using Vue ecosystem. Participated in frontend component library design, improving team development efficiency."
+    }
+  },
+  "projects": {
+    "title": "Open Source Projects",
+    "viewCode": "View Code",
+    "project1": {
+      "title": "vxe-table-plugin",
+      "description": "Vue3 table plugin providing rich table functionality and flexible configuration options, supporting big data rendering and virtual scrolling."
+    },
+    "project2": {
+      "title": "mini-vue-router",
+      "description": "Lightweight Vue routing implementation providing core functionality to help developers understand the working principles of Vue Router."
+    },
+    "project3": {
+      "title": "fe-monitor",
+      "description": "Frontend monitoring SDK supporting performance monitoring, error capture, and user behavior tracking to help developers improve application quality."
+    }
+  },
+  "blog": {
+    "title": "Latest Articles",
+    "readMore": "Read More",
+    "post1": {
+      "title": "Vue3 Composition API Best Practices",
+      "description": "In-depth discussion of Vue3 Composition API usage techniques and best practices to help you write more maintainable code.",
+      "date": "2023-12-15"
+    },
+    "post2": {
+      "title": "Frontend Engineering: Building Modern Projects from Scratch",
+      "description": "Detailed introduction on how to build a modern frontend project from scratch with complete toolchain and best practices.",
+      "date": "2023-11-20"
+    },
+    "post3": {
+      "title": "Understanding Micro-Frontend Architecture",
+      "description": "Analysis of micro-frontend core concepts, implementation methods, and application scenarios, sharing experience and insights from micro-frontend transformation.",
+      "date": "2023-10-05"
+    }
+  },
+  "contact": {
+    "title": "Contact Me",
+    "form": {
+      "title": "Leave a Message",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message",
+      "success": "Your message has been successfully submitted to GitHub Issues. Thank you!",
+      "error": "Submission failed, please try again later.",
+      "validation": "Please fill in all required fields"
+    },
+    "other": {
+      "title": "Other Contact Methods",
+      "email": "Email",
+      "wechat": "WeChat Official Account",
+      "wechatName": "Frontend Xiaoxin",
+      "followWechat": "Follow my WeChat account"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Frontend Xiaoxin. All rights reserved."
+  },
+  "toggles": {
+    "language": "Language",
+    "theme": "Theme",
+    "lightMode": "Light",
+    "darkMode": "Dark"
+  }
+} 
