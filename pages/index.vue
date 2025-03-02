@@ -2,10 +2,40 @@
 import { ref, onMounted, watch, computed } from 'vue'
 import { useTheme } from '~/composables/useTheme'
 import { useI18n } from 'vue-i18n'
+import ArticlePreview from '~/components/ArticlePreview.vue'
 
 const { locale, t } = useI18n()
 const { theme, toggleTheme } = useTheme()
 const currentLocale = ref(locale.value)
+
+// 文章预览状态
+const isPreviewOpen = ref(false)
+const selectedArticle = ref({})
+const selectedArticleContent = ref({})
+const isLoadingArticle = ref(false)
+
+// 打开文章预览并加载完整内容
+const openArticlePreview = async (article) => {
+  selectedArticle.value = article
+  isPreviewOpen.value = true
+  isLoadingArticle.value = true
+  
+  try {
+    // 从API获取完整文章内容
+    const { data } = await useFetch(`/api/articles?slug=${article.slug}`)
+    selectedArticleContent.value = data.value
+  } catch (error) {
+    console.error('Error fetching article content:', error)
+  } finally {
+    isLoadingArticle.value = false
+  }
+}
+
+// 关闭文章预览
+const closeArticlePreview = () => {
+  isPreviewOpen.value = false
+  selectedArticleContent.value = {}
+}
 
 // 联系表单数据
 const contactForm = ref({
@@ -86,6 +116,50 @@ const skillItems = computed(() => {
   return locale.value === 'zh' ? zhSkills : enSkills
 })
 
+// 文章分页数据
+const currentPage = ref(1)
+const articlesPerPage = 2
+const totalArticles = computed(() => blogArticles.value?.length || 0)
+const totalPages = computed(() => Math.ceil(totalArticles.value / articlesPerPage))
+
+// 从API获取博客文章
+const { data: apiArticles, pending: articlesLoading } = useFetch('/api/articles')
+
+// 博客文章数据
+const generateBlogArticles = () => {
+  if (!apiArticles.value) return []
+  
+  const isZh = locale.value === 'zh'
+  return apiArticles.value.map(article => ({
+    ...article,
+    title: isZh ? article.title.zh : article.title.en,
+    description: isZh ? article.description.zh : article.description.en,
+    date: article.date,
+    originalUrl: article.originalUrl,
+    slug: article.slug
+  }))
+}
+
+const blogArticles = computed(() => generateBlogArticles())
+
+// 分页逻辑
+const currentArticles = computed(() => {
+  const start = (currentPage.value - 1) * articlesPerPage
+  const end = start + articlesPerPage
+  return blogArticles.value?.slice(start, end) || []
+})
+
+const goToPage = (page) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+    // 添加平滑滚动到博客区域
+    const blogSection = document.getElementById('blog')
+    if (blogSection) {
+      blogSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}
+
 // 语言切换功能
 const toggleLanguage = () => {
   locale.value = locale.value === 'zh' ? 'en' : 'zh'
@@ -111,6 +185,43 @@ onMounted(() => {
       currentLocale.value = newLocale
     })
   }
+})
+
+// 监听语言变化，重置分页到第一页
+watch(locale, () => {
+  currentPage.value = 1
+})
+
+// 分页UI优化，计算要显示的页码
+const visiblePageNumbers = computed(() => {
+  // 如果总页数小于等于5，则显示所有页码
+  if (totalPages.value <= 5) {
+    return Array.from({ length: totalPages.value }, (_, i) => i + 1)
+  }
+  
+  // 否则，我们显示当前页附近的页码以及首尾页
+  let result = [1, totalPages.value]
+  
+  // 当前页附近的页码
+  for (let i = Math.max(2, currentPage.value - 1); i <= Math.min(totalPages.value - 1, currentPage.value + 1); i++) {
+    result.push(i)
+  }
+  
+  // 排序并去重
+  result = [...new Set(result)].sort((a, b) => a - b)
+  
+  // 添加省略号
+  const withEllipsis = []
+  for (let i = 0; i < result.length; i++) {
+    withEllipsis.push(result[i])
+    
+    // 如果当前页和下一页之间有间隔，添加省略号
+    if (i < result.length - 1 && result[i + 1] - result[i] > 1) {
+      withEllipsis.push('...')
+    }
+  }
+  
+  return withEllipsis
 })
 </script>
 
@@ -291,29 +402,94 @@ onMounted(() => {
           <div id="blog" class="backdrop-blur-xl dark:bg-glass-dark bg-glass-light rounded-xl p-6 shadow-lg border dark:border-dark-lighter/50 border-light-darker/50 mb-8">
             <h3 class="text-2xl font-bold text-primary mb-6">{{ $t('blog.title') }}</h3>
             <div class="space-y-6">
-              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
-                <h4 class="text-xl font-semibold dark:text-light text-dark mb-2">{{ $t('blog.post1.title') }}</h4>
-                <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post1.description') }}</p>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-primary/80">{{ $t('blog.post1.date') }}</span>
-                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
-                </div>
+              <!-- 加载状态 -->
+              <div v-if="articlesLoading" class="flex flex-col items-center py-8">
+                <div class="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+                <p class="text-primary">{{ locale === 'zh' ? '正在加载文章...' : 'Loading articles...' }}</p>
               </div>
-              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
-                <h4 class="text-xl font-semibold dark:text-light text-dark mb-2">{{ $t('blog.post2.title') }}</h4>
-                <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post2.description') }}</p>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-primary/80">{{ $t('blog.post2.date') }}</span>
-                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
-                </div>
+              
+              <!-- 没有文章时显示 -->
+              <div v-else-if="currentArticles.length === 0" class="text-center py-8 dark:text-light-dark/70 text-dark-light/70">
+                <p>{{ locale === 'zh' ? '暂无文章' : 'No articles available' }}</p>
               </div>
-              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
-                <h4 class="text-xl font-semibold dark:text-light text-dark mb-2">{{ $t('blog.post3.title') }}</h4>
-                <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post3.description') }}</p>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-primary/80">{{ $t('blog.post3.date') }}</span>
-                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
+              
+              <!-- 文章列表 -->
+              <template v-else>
+                <div v-for="(article, index) in currentArticles" :key="index" class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
+                  <h4 class="text-xl font-semibold dark:text-light text-dark mb-2">{{ article.title }}</h4>
+                  <p class="dark:text-light-dark text-dark-light mb-3">{{ article.description }}</p>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-primary/80">{{ article.date }}</span>
+                    <div class="flex space-x-3">
+                      <button 
+                        @click="openArticlePreview(article)" 
+                        class="text-primary hover:underline flex items-center"
+                      >
+                        <span>{{ locale === 'zh' ? '阅读全文' : 'Read Article' }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </button>
+                      <a 
+                        v-if="article.originalUrl" 
+                        :href="article.originalUrl" 
+                        target="_blank" 
+                        class="text-primary hover:underline flex items-center"
+                      >
+                        <span>{{ $t('blog.readMore') }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
                 </div>
+              </template>
+              
+              <!-- 分页控件 -->
+              <div v-if="totalPages > 1" class="flex justify-center items-center space-x-2 mt-6">
+                <button 
+                  @click="goToPage(currentPage - 1)" 
+                  :disabled="currentPage === 1" 
+                  class="px-3 py-1 rounded-md dark:bg-dark-lighter/70 bg-light-darker/30 text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-primary/20"
+                >
+                  {{ locale === 'zh' ? '上一页' : 'Prev' }}
+                </button>
+                
+                <div class="flex space-x-1">
+                  <template v-for="item in visiblePageNumbers" :key="item">
+                    <!-- 省略号 -->
+                    <span 
+                      v-if="item === '...'" 
+                      class="w-8 h-8 flex items-center justify-center dark:text-light-dark text-dark-light"
+                    >
+                      {{ item }}
+                    </span>
+                    
+                    <!-- 页码按钮 -->
+                    <button 
+                      v-else
+                      @click="goToPage(item)" 
+                      :class="[
+                        'w-8 h-8 rounded-md flex items-center justify-center transition-colors',
+                        currentPage === item 
+                          ? 'bg-primary text-white' 
+                          : 'dark:bg-dark-lighter/70 bg-light-darker/30 text-primary hover:bg-primary/20'
+                      ]"
+                    >
+                      {{ item }}
+                    </button>
+                  </template>
+                </div>
+                
+                <button 
+                  @click="goToPage(currentPage + 1)" 
+                  :disabled="currentPage === totalPages" 
+                  class="px-3 py-1 rounded-md dark:bg-dark-lighter/70 bg-light-darker/30 text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:bg-primary/20"
+                >
+                  {{ locale === 'zh' ? '下一页' : 'Next' }}
+                </button>
               </div>
             </div>
           </div>
@@ -372,7 +548,7 @@ onMounted(() => {
                   <p class="dark:text-light-dark text-dark-light text-center mt-3 font-medium">{{ $t('contact.other.followWechat') }}</p>
                   <div class="flex items-center mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h2v4l.586-.586z" />
                     </svg>
                     <span class="text-primary font-medium">{{ $t('contact.other.wechatName') }}</span>
                   </div>
@@ -420,6 +596,15 @@ onMounted(() => {
         </footer>
       </div>
     </div>
+    
+    <!-- 文章预览模态窗口 -->
+    <ArticlePreview 
+      :article="selectedArticle" 
+      :article-content="selectedArticleContent"
+      :is-open="isPreviewOpen" 
+      :is-loading="isLoadingArticle"
+      @close="closeArticlePreview" 
+    />
   </div>
 </template>
 
