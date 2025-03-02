@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     },
-    baseURL: '/'
+    baseURL: process.env.NODE_ENV === 'production' ? '/' : '/'
   },
   ssr: true,
   nitro: {

@@ -49,9 +49,13 @@ jobs:
       - name: Build
         run: pnpm run generate
         
+      - name: List output directory
+        run: ls -la ./.output/public
+        
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.output/public
-          cname: zanx.fun 
+          cname: zanx.fun
+          force_orphan: true 
