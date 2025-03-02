@@ -12,7 +12,6 @@
 - Vue 3
 - Tailwind CSS
 - i18n 多语言支持
-- Vercel 部署
 
 ## 本地开发
 
@@ -26,106 +25,9 @@ pnpm dev
 # 构建生产版本
 pnpm build
 
-# 生成静态网站（用于GitHub Pages）
-pnpm generate
-```
-
-## 部署到GitHub Pages
-
-项目配置了GitHub Actions自动部署流程。当代码推送到main分支时，会自动构建并部署到GitHub Pages。
-
-## Setup
-
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
+# 预览生产版本
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## 🚀 部署
-
-### Vercel 部署
-
-1. 在Vercel上创建新项目，并关联GitHub仓库
-2. 设置以下构建配置：
-   - 构建命令: `pnpm run build`
-   - 输出目录: `.output`
-3. 点击"Deploy"按钮
-
-### 通过GitHub Actions部署到Vercel
-
-1. 在Vercel账户中获取以下信息：
-   - VERCEL_TOKEN: 从[Vercel Tokens页面](https://vercel.com/account/tokens)创建
-   - VERCEL_ORG_ID: 从项目设置页面获取
-   - VERCEL_PROJECT_ID: 从项目设置页面获取
-
-2. 在GitHub仓库添加这些信息为Secrets
-
-3. 推送代码到main分支，GitHub Actions将自动部署到Vercel
 
 ## ✉️ 留言功能配置
 
@@ -148,9 +50,5 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
    - 在`server/api/create-github-issue.ts`文件中
    - 将`GITHUB_OWNER`更改为您的GitHub用户名
    - 将`GITHUB_REPO`更改为接收留言的仓库名
-   ```typescript
-   const GITHUB_OWNER = 'YourUsername'
-   const GITHUB_REPO = 'YourRepository'
-   ```
 
 访客提交留言后，系统会自动在指定仓库中创建一个带有"网站留言"标签的Issue。
