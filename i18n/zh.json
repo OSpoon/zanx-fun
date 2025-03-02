@@ -85,9 +85,9 @@
     "other": {
       "title": "其他联系方式",
       "email": "邮箱",
-      "wechat": "微信公众号",
-      "wechatName": "前端小鑫同学",
-      "followWechat": "欢迎关注公众号"
+      "wechat": "微信",
+      "wechatName": "小鑫同学",
+      "followWechat": "欢迎关注"
     }
   },
   "footer": {

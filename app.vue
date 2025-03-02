@@ -36,8 +36,10 @@
         <!-- 个人简介卡片 -->
         <div id="about" class="backdrop-blur-xl dark:bg-glass-dark bg-glass-light rounded-xl p-8 mb-8 shadow-lg border dark:border-dark-lighter/50 border-light-darker/50">
           <div class="flex flex-col md:flex-row md:items-center space-y-6 md:space-y-0 md:space-x-8">
-            <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg border-2 border-primary/30 mx-auto md:mx-0 flex-shrink-0">
-              <img src="https://avatars.githubusercontent.com/OSpoon" alt="头像" class="w-full h-full object-cover important-rounded" style="border-radius: 9999px !important;" />
+            <div class="avatar-container w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-primary/50 mx-auto md:mx-0 flex-shrink-0 relative group">
+              <div class="avatar-glow absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <img src="https://avatars.githubusercontent.com/OSpoon" alt="头像" class="w-full h-full object-cover important-rounded avatar-image" style="border-radius: 9999px !important;" />
+              <div class="avatar-ring absolute inset-0 border-4 border-transparent rounded-full group-hover:border-primary group-hover:scale-110 transition-all duration-300"></div>
             </div>
             <div>
               <h2 class="text-3xl font-bold text-primary mb-4">{{ $t('home.greeting') }}</h2>
@@ -243,30 +245,50 @@
             </div>
             <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
               <h4 class="text-lg font-semibold dark:text-light text-dark mb-4">{{ $t('contact.other.title') }}</h4>
-              <div class="space-y-4">
-                <div class="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              
+              <!-- 微信二维码 - 显示在顶部突出位置 -->
+              <div class="mb-6 flex flex-col items-center">
+                <div class="w-40 h-40 mx-auto bg-white p-1 rounded shadow-md">
+                  <img src="/me.jpg" alt="公众号二维码" class="w-full h-full object-cover">
+                </div>
+                <p class="dark:text-light-dark text-dark-light text-center mt-3 font-medium">{{ $t('contact.other.followWechat') }}</p>
+                <div class="flex items-center mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                  </svg>
+                  <span class="text-primary font-medium">{{ $t('contact.other.wechatName') }}</span>
+                </div>
+              </div>
+              
+              <!-- 分隔线 -->
+              <div class="border-t border-primary/20 my-4"></div>
+              
+              <!-- 其他联系方式 -->
+              <div class="mt-4">
+                <div class="flex items-center bg-primary/5 p-3 rounded-lg mb-3 hover:bg-primary/10 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <div>
                     <h5 class="dark:text-light text-dark font-medium">{{ $t('contact.other.email') }}</h5>
-                    <p class="dark:text-light-dark text-dark-light">feng_junwen@foxmail.com</p>
+                    <p class="dark:text-light-dark text-dark-light">zxin088@gmail.com</p>
                   </div>
                 </div>
-                <div class="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                  </svg>
-                  <div>
-                    <h5 class="dark:text-light text-dark font-medium">{{ $t('contact.other.wechat') }}</h5>
-                    <p class="dark:text-light-dark text-dark-light">{{ $t('contact.other.wechatName') }}</p>
-                  </div>
-                </div>
-                <div class="mt-6">
-                  <p class="dark:text-light-dark text-dark-light text-center mb-2">{{ $t('contact.other.followWechat') }}</p>
-                  <div class="w-32 h-32 mx-auto bg-white p-1 rounded">
-                    <img src="https://picsum.photos/seed/qrcode/200/200" alt="公众号二维码" class="w-full h-full">
-                  </div>
+                
+                <div class="flex items-center justify-center mt-6">
+                  <!-- GitHub -->
+                  <a href="https://github.com/OSpoon" target="_blank" class="mx-2 p-2 rounded-full hover:bg-primary/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </a>
+                  
+                  <!-- 掘金 -->
+                  <a href="https://juejin.cn/user/3702810894152983" target="_blank" class="mx-2 p-2 rounded-full hover:bg-primary/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 22L3.82047 7L20.1795 7L12 22Z"/>
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
@@ -440,4 +462,35 @@ img.rounded-full,
   border-radius: 50% !important;
   overflow: hidden;
 }
+
+/* 头像悬停效果 */
+.avatar-container {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.avatar-container:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(96, 165, 250, 0.5);
+}
+
+.avatar-container:hover .avatar-image {
+  /* 已移除所有动画相关代码 */
+}
+
+.avatar-image {
+  transition: transform 0.3s ease;
+}
+
+.avatar-glow {
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.avatar-ring {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 移除所有旋转动画定义 */
 </style>
