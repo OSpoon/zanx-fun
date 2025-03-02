@@ -1,6 +1,38 @@
-# Nuxt Minimal Starter
+# 前端小鑫同学 - 个人网站
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+这是我的个人网站项目，使用Nuxt 3和Tailwind CSS构建。
+
+## 网站预览
+
+访问 [https://zanx.fun](https://zanx.fun) 查看在线版本。
+
+## 技术栈
+
+- Nuxt 3
+- Vue 3
+- Tailwind CSS
+- i18n 多语言支持
+- GitHub Pages 部署
+
+## 本地开发
+
+```bash
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
+pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 生成静态网站（用于GitHub Pages）
+pnpm generate
+```
+
+## 部署到GitHub Pages
+
+项目配置了GitHub Actions自动部署流程。当代码推送到main分支时，会自动构建并部署到GitHub Pages。
 
 ## Setup
 
