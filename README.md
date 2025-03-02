@@ -12,7 +12,7 @@
 - Vue 3
 - Tailwind CSS
 - i18n 多语言支持
-- GitHub Pages 部署
+- Vercel 部署
 
 ## 本地开发
 
@@ -108,18 +108,24 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ## 🚀 部署
 
-按照以下步骤部署您的个人网站：
+### Vercel 部署
 
-```bash
-# 安装依赖
-pnpm install
+1. 在Vercel上创建新项目，并关联GitHub仓库
+2. 设置以下构建配置：
+   - 构建命令: `pnpm run build`
+   - 输出目录: `.output`
+3. 点击"Deploy"按钮
 
-# 构建生产版本
-pnpm build
+### 通过GitHub Actions部署到Vercel
 
-# 启动生产服务器
-pnpm preview
-```
+1. 在Vercel账户中获取以下信息：
+   - VERCEL_TOKEN: 从[Vercel Tokens页面](https://vercel.com/account/tokens)创建
+   - VERCEL_ORG_ID: 从项目设置页面获取
+   - VERCEL_PROJECT_ID: 从项目设置页面获取
+
+2. 在GitHub仓库添加这些信息为Secrets
+
+3. 推送代码到main分支，GitHub Actions将自动部署到Vercel
 
 ## ✉️ 留言功能配置
 
