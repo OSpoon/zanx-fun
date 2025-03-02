@@ -2,9 +2,12 @@ import { ref, watch, onMounted } from 'vue'
 
 export const useTheme = () => {
   const theme = ref<'dark' | 'light'>('dark')
+  const isClient = typeof window !== 'undefined'
 
   // 初始化主题设置
   onMounted(() => {
+    if (!isClient) return
+    
     // 检查本地存储中是否已有主题设置
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -18,6 +21,7 @@ export const useTheme = () => {
 
   // 当主题变化时应用到DOM
   watch(theme, (newTheme) => {
+    if (!isClient) return
     applyTheme(newTheme)
     localStorage.setItem('theme', newTheme)
   })
@@ -27,6 +31,8 @@ export const useTheme = () => {
   }
 
   const applyTheme = (newTheme: 'dark' | 'light') => {
+    if (!isClient) return
+    
     // 应用主题到HTML元素以便Tailwind可以使用dark类
     const htmlEl = document.documentElement
     if (newTheme === 'dark') {

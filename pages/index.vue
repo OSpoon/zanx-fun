@@ -92,20 +92,25 @@ const toggleLanguage = () => {
   currentLocale.value = locale.value
 }
 
+// 判断是否在客户端环境
+const isClient = process.client
+
 // 初始化
 onMounted(() => {
   // 设置默认语言
-  const savedLang = localStorage.getItem('language')
-  if (savedLang) {
-    locale.value = savedLang
-    currentLocale.value = savedLang
-  }
+  if (isClient) {
+    const savedLang = localStorage.getItem('language')
+    if (savedLang) {
+      locale.value = savedLang
+      currentLocale.value = savedLang
+    }
 
-  // 监听语言变化并保存
-  watch(locale, (newLocale) => {
-    localStorage.setItem('language', newLocale)
-    currentLocale.value = newLocale
-  })
+    // 监听语言变化并保存
+    watch(locale, (newLocale) => {
+      localStorage.setItem('language', newLocale)
+      currentLocale.value = newLocale
+    })
+  }
 })
 </script>
 
@@ -291,7 +296,7 @@ onMounted(() => {
                 <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post1.description') }}</p>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-primary/80">{{ $t('blog.post1.date') }}</span>
-                  <a href="#" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
+                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
                 </div>
               </div>
               <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
@@ -299,7 +304,7 @@ onMounted(() => {
                 <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post2.description') }}</p>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-primary/80">{{ $t('blog.post2.date') }}</span>
-                  <a href="#" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
+                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
                 </div>
               </div>
               <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
@@ -307,7 +312,7 @@ onMounted(() => {
                 <p class="dark:text-light-dark text-dark-light mb-3">{{ $t('blog.post3.description') }}</p>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-primary/80">{{ $t('blog.post3.date') }}</span>
-                  <a href="#" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
+                  <a href="https://juejin.cn/user/3702810894152983/posts" target="_blank" class="text-primary hover:underline">{{ $t('blog.readMore') }}</a>
                 </div>
               </div>
             </div>
@@ -362,7 +367,7 @@ onMounted(() => {
                 <!-- 微信二维码 - 显示在顶部突出位置 -->
                 <div class="mb-6 flex flex-col items-center">
                   <div class="w-40 h-40 mx-auto bg-white p-1 rounded shadow-md">
-                    <img src="/me.jpg" alt="公众号二维码" class="w-full h-full object-cover">
+                    <img src="/images/qrcode.jpg" alt="公众号二维码" class="w-full h-full object-cover">
                   </div>
                   <p class="dark:text-light-dark text-dark-light text-center mt-3 font-medium">{{ $t('contact.other.followWechat') }}</p>
                   <div class="flex items-center mt-1">
@@ -418,7 +423,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 body {
   @apply bg-light dark:bg-dark;
 }

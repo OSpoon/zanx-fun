@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
       method: 'POST',
       headers: {
         'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `token ${githubToken}`,
+        'Authorization': `Bearer ${githubToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
       issueUrl: data.html_url,
       message: '留言已成功提交'
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('创建GitHub Issue出错:', error)
     
     // 返回格式化的错误响应
