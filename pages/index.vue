@@ -118,7 +118,7 @@ const skillItems = computed(() => {
 
 // 文章分页数据
 const currentPage = ref(1)
-const articlesPerPage = 2
+const articlesPerPage = 5
 const totalArticles = computed(() => blogArticles.value?.length || 0)
 const totalPages = computed(() => Math.ceil(totalArticles.value / articlesPerPage))
 
@@ -327,25 +327,39 @@ const visiblePageNumbers = computed(() => {
             <div class="space-y-6">
               <div class="relative pl-8 border-l border-primary/30">
                 <div class="absolute w-4 h-4 bg-primary rounded-full -left-2 mt-1"></div>
-                <h4 class="text-xl font-semibold dark:text-light text-dark">{{ $t('work.job1.title') }}</h4>
-                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                  <p class="text-primary/80">{{ $t('work.job1.company').split('|')[0].trim() }}</p>
-                  <p class="text-primary/90 font-medium">{{ $t('work.job1.company').split('|')[1]?.trim() }}</p>
+                <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-4 shadow-md border dark:border-dark-lighter/70 border-light-darker/50 transform hover:scale-105 transition-all">
+                  <h4 class="text-xl font-semibold dark:text-light text-dark">{{ $t('work.job1.title') }}</h4>
+                  <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                    <p class="text-primary/80">{{ $t('work.job1.company').split('|')[0].trim() }}</p>
+                    <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm border border-primary/30 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      2021年至今
+                    </span>
+                  </div>
+                  <p class="dark:text-light-dark text-dark-light mt-2">
+                    {{ $t('work.job1.description') }}
+                  </p>
                 </div>
-                <p class="dark:text-light-dark text-dark-light mt-2">
-                  {{ $t('work.job1.description') }}
-                </p>
               </div>
               <div class="relative pl-8 border-l border-primary/30">
                 <div class="absolute w-4 h-4 bg-primary rounded-full -left-2 mt-1"></div>
-                <h4 class="text-xl font-semibold dark:text-light text-dark">{{ $t('work.job2.title') }}</h4>
-                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-                  <p class="text-primary/80">{{ $t('work.job2.company').split('|')[0].trim() }}</p>
-                  <p class="text-primary/90 font-medium">{{ $t('work.job2.company').split('|')[1]?.trim() }}</p>
+                <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-4 shadow-md border dark:border-dark-lighter/70 border-light-darker/50 transform hover:scale-105 transition-all">
+                  <h4 class="text-xl font-semibold dark:text-light text-dark">{{ $t('work.job2.title') }}</h4>
+                  <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                    <p class="text-primary/80">{{ $t('work.job2.company').split('|')[0].trim() }}</p>
+                    <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm border border-primary/30 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      2019年-2021年
+                    </span>
+                  </div>
+                  <p class="dark:text-light-dark text-dark-light mt-2">
+                    {{ $t('work.job2.description') }}
+                  </p>
                 </div>
-                <p class="dark:text-light-dark text-dark-light mt-2">
-                  {{ $t('work.job2.description') }}
-                </p>
               </div>
             </div>
           </div>
@@ -415,7 +429,7 @@ const visiblePageNumbers = computed(() => {
               
               <!-- 文章列表 -->
               <template v-else>
-                <div v-for="(article, index) in currentArticles" :key="index" class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
+                <div v-for="(article, index) in currentArticles" :key="index" class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50 transform hover:scale-105 transition-all">
                   <h4 class="text-xl font-semibold dark:text-light text-dark mb-2">{{ article.title }}</h4>
                   <p class="dark:text-light-dark text-dark-light mb-3">{{ article.description }}</p>
                   <div class="flex justify-between items-center">
@@ -498,7 +512,7 @@ const visiblePageNumbers = computed(() => {
           <div id="contact" class="backdrop-blur-xl dark:bg-glass-dark bg-glass-light rounded-xl p-6 shadow-lg border dark:border-dark-lighter/50 border-light-darker/50 mb-8">
             <h3 class="text-2xl font-bold text-primary mb-6">{{ $t('contact.title') }}</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
+              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50 transform hover:scale-105 transition-all">
                 <h4 class="text-lg font-semibold dark:text-light text-dark mb-4">{{ $t('contact.form.title') }}</h4>
                 <div v-if="formSubmitted" class="p-4 bg-green-100 dark:bg-green-900 rounded-lg mb-4">
                   <p class="text-green-700 dark:text-green-300">{{ $t('contact.form.success') }}</p>
@@ -537,7 +551,7 @@ const visiblePageNumbers = computed(() => {
                   </button>
                 </div>
               </div>
-              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50">
+              <div class="dark:bg-dark-lighter/50 bg-light-darker/20 rounded-lg p-5 shadow-md border dark:border-dark-lighter/70 border-light-darker/50 transform hover:scale-105 transition-all">
                 <h4 class="text-lg font-semibold dark:text-light text-dark mb-4">{{ $t('contact.other.title') }}</h4>
                 
                 <!-- 微信二维码 - 显示在顶部突出位置 -->
