@@ -232,34 +232,6 @@ const visiblePageNumbers = computed(() => {
       <div class="absolute top-0 left-0 right-0 h-64 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl -z-10"></div>
 
       <div class="container mx-auto px-4 py-8">
-        <!-- 玻璃拟态导航栏 -->
-        <nav class="backdrop-blur-xl dark:bg-glass-dark bg-glass-light rounded-xl p-4 mb-8 shadow-lg border dark:border-dark-lighter/50 border-light-darker/50">
-          <div class="flex flex-col md:flex-row md:items-center justify-between">
-            <h1 class="text-2xl font-bold text-primary mb-4 md:mb-0">{{ $t('nav.title', '前端小鑫同学') }}</h1>
-            <div class="flex items-center space-x-6">
-              <a href="#about" class="dark:text-light-dark text-dark-light hover:text-primary transition-colors">{{ $t('nav.about') }}</a>
-              <a href="#projects" class="dark:text-light-dark text-dark-light hover:text-primary transition-colors">{{ $t('nav.projects') }}</a>
-              <a href="#blog" class="dark:text-light-dark text-dark-light hover:text-primary transition-colors">{{ $t('nav.blog') }}</a>
-              <a href="#contact" class="dark:text-light-dark text-dark-light hover:text-primary transition-colors">{{ $t('nav.contact') }}</a>
-              
-              <!-- 主题切换按钮 -->
-              <button @click="toggleTheme" class="p-2 rounded-full hover:bg-primary/10 transition-colors">
-                <svg v-if="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              </button>
-              
-              <!-- 语言切换按钮 -->
-              <button @click="toggleLanguage" class="p-2 rounded-full hover:bg-primary/10 transition-colors">
-                <span class="text-primary font-medium">{{ currentLocale === 'zh' ? 'EN' : '中' }}</span>
-              </button>
-            </div>
-          </div>
-        </nav>
-
         <!-- 主要内容区域 -->
         <main>
           <!-- 个人简介卡片 -->
@@ -299,23 +271,11 @@ const visiblePageNumbers = computed(() => {
                   </svg>
                   {{ $t('social.github') }}
                 </a>
-                <a href="https://juejin.cn/user/3702810894152983" target="_blank" class="flex items-center dark:text-light-dark text-dark-light hover:text-primary transition-colors">
+                <a href="https://juejin.cn/user/3966693685871694" target="_blank" class="flex items-center dark:text-light-dark text-dark-light hover:text-primary transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 22L3.82047 7L20.1795 7L12 22Z"/>
                   </svg>
                   {{ $t('social.juejin') }}
-                </a>
-                <a href="https://blog.csdn.net/hongwei5204" target="_blank" class="flex items-center dark:text-light-dark text-dark-light hover:text-primary transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M2 3H22V21H2V3ZM4 5V19H20V5H4Z"/>
-                  </svg>
-                  {{ $t('social.csdn') }}
-                </a>
-                <a href="https://www.zhihu.com/people/chai-zi-hao-34-76" target="_blank" class="flex items-center dark:text-light-dark text-dark-light hover:text-primary transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078H16.5s-.234 1.152-.468 1.74h-2.669v10.18h-2.333v-10.18h-3.58L7.45 4.078zm10.629 5.315c0-.702-.145-1.91-.482-2.337-.336-.43-1.382-.636-1.96-.702h-.016c.077.149.231.702.231 1.301v.152h-3.336V7.5c0-.351.336-.585.336-.585h3.336v-1.26s-.165-.585-.585-.622c-.42-.035-6.571 0-6.571 0S8.032 7.5 8.001 9.315c-.03 1.818.475 2.944.598 3.104 0 0 1.458-.039 2.318-.039h.918c0 .4-.117 2.192-.806 3.104h2.606c-.324-.93-.713-2.337-.713-3.104h1.46c.402 4 1.969 4.09 1.969 4.09 0-1.653.06-3.628.06-3.628h1.763v3.59c.88-.7 2.333-1.167 2.333-3.59-.001-2.42-2.143-3.72-2.143-3.669z"/>
-                  </svg>
-                  {{ $t('social.zhihu') }}
                 </a>
               </div>
             </div>
@@ -571,32 +531,11 @@ const visiblePageNumbers = computed(() => {
                       <p class="dark:text-light-dark text-dark-light">zxin088@gmail.com</p>
                     </div>
                   </div>
-                  
-                  <div class="flex items-center justify-center mt-6">
-                    <!-- GitHub -->
-                    <a href="https://github.com/OSpoon" target="_blank" class="mx-2 p-2 rounded-full hover:bg-primary/10 transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                    </a>
-                    
-                    <!-- 掘金 -->
-                    <a href="https://juejin.cn/user/3702810894152983" target="_blank" class="mx-2 p-2 rounded-full hover:bg-primary/10 transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 22L3.82047 7L20.1795 7L12 22Z"/>
-                      </svg>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </main>
-
-        <!-- 页脚 -->
-        <footer class="backdrop-blur-xl dark:bg-glass-dark bg-glass-light rounded-xl p-4 text-center dark:text-light-dark/70 text-dark-light/70 border dark:border-dark-lighter/50 border-light-darker/50">
-          <p>{{ $t('footer.copyright') }}</p>
-        </footer>
       </div>
     </div>
     

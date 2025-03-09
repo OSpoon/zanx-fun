@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         clientPort: 443,
         protocol: 'wss',
       },
-      allowedHosts: ["3000-7d7fb7f014f5-web.clackypaas.com"],
+      allowedHosts: ["3000-75b34c999770-web.clackypaas.com"],
     }
   }
 })

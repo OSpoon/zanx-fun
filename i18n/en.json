@@ -98,5 +98,16 @@
     "theme": "Theme",
     "lightMode": "Light",
     "darkMode": "Dark"
+  },
+  "bookmarks": {
+    "pageTitle": "Bookmarks",
+    "pageDescription": "Your curated list of development resources and favorite websites maintained by Frontend Xiaoxin",
+    "categories": "Filter by categories",
+    "allCategories": "All Categories",
+    "error": "Failed to load bookmarks. Please try again",
+    "retry": "Retry",
+    "emptyList": "You haven't added any bookmarks yet. Come back later!",
+    "noCategoryItems": "No bookmarks matching this category",
+    "filterHint": "Filter by category"
   }
-} 
+}
