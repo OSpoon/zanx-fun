@@ -15,5 +15,15 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
+  },
+  vite: {
+    server: {
+      host: '0.0.0.0',
+      hmr: {
+        clientPort: 443,
+        protocol: 'wss',
+      },
+      allowedHosts: ["3000-7d7fb7f014f5-web.clackypaas.com"],
+    }
   }
 })
