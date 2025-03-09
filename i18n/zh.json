@@ -98,5 +98,19 @@
     "theme": "主题",
     "lightMode": "浅色",
     "darkMode": "深色"
+  },
+  "bookmarks": {
+    "pageTitle": "书签收藏",
+    "pageDescription": "前端小鑫同学精心整理的开发资源和收藏网站",
+    "title": "我的书签",
+    "description": "这里收集了我日常开发中常用的网站和工具，希望对你有所帮助",
+    "categories": "分类筛选",
+    "allCategories": "全部分类",
+    "error": "加载书签失败，请重试",
+    "retry": "重新加载",
+    "noBookmarks": "暂无书签数据",
+    "emptyList": "当前没有添加任何书签，请稍后再来！",
+    "noCategoryItems": "该分类下暂无书签",
+    "filterHint": "按分类筛选"
   }
-} 
+}
