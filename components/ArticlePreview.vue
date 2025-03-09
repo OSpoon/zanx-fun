@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 
 const props = defineProps({
   article: {
@@ -27,7 +29,20 @@ const md = new MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
-  breaks: true
+  breaks: true,
+  highlight: function(str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+               hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+               '</code></pre>';
+      } catch (__) {}
+    }
+    // 使用通用方式高亮
+    return '<pre class="hljs"><code>' +
+           md.utils.escapeHtml(str) +
+           '</code></pre>';
+  }
 })
 
 const renderedContent = ref('')
@@ -180,12 +195,14 @@ const preventClose = (e) => {
   @apply px-1.5 py-0.5 rounded dark:bg-dark-lighter/70 bg-light-darker/20 font-mono text-sm;
 }
 
-.markdown-body :deep(pre) {
-  @apply p-4 rounded-lg dark:bg-dark-lighter/70 bg-light-darker/20 overflow-x-auto mb-4;
+.markdown-body :deep(pre.hljs) {
+  @apply p-4 rounded-lg overflow-x-auto mb-4;
+  background: transparent;
 }
 
-.markdown-body :deep(pre code) {
-  @apply font-mono text-sm dark:text-light-dark text-dark-light;
+.markdown-body :deep(pre.hljs code) {
+  @apply font-mono text-sm;
+  background: transparent;
 }
 
 .markdown-body :deep(img) {
@@ -207,4 +224,4 @@ const preventClose = (e) => {
 .markdown-body :deep(hr) {
   @apply border-t dark:border-dark-lighter/50 border-light-darker/50 my-6;
 }
-</style> 
+</style>
